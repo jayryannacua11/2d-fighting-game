@@ -1,29 +1,21 @@
 <head>
-	<style>
-		*{
-			box-sizing: border-box;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	
 </head>
 <body>
-	<div style = "position: relative; display: inline-block;">
-		<div style = "position: absolute; display: flex; width: 100%; 
-						align-items: center; padding: 20px">
+	<div class = "container">
+		<div class = "topContainer">
 			<!-- Player HP -->
-			<div style="position: relative; display: flex;justify-content: flex-end; 
-						height: 30px ; width: 100%;">
-				<div style="background-color: yellow; height: 30px; width: 100%"></div>
-				<div id="playerHealth" style="position: absolute; background: blue;
-						top: 0; right: 0; bottom: 0; width: 100%"></div>
+			<div class = "playerHP">
+				<div></div> <!-- Player HP left -->
+				<div id="playerHealth"></div>
 			</div>
 			<!-- Timer -->
-			<div style="background-color: red; width: 100px; height: 100px; flex-shrink: 0;"></div>
+			<div class = "timer"></div>
 			<!-- Enemy HP -->
-			<div style="position: relative; 
-						height: 30px ; width: 100%;">
-				<div style="background-color: yellow; height: 30px"></div>
-				<div id="enemyHealth" style="position: absolute; background: blue; 
-						top: 0; right: 0; bottom: 0; left: 0;"></div>
+			<div class = "enemyHP">
+				<div></div> <!-- Enemy HP left -->
+				<div id="enemyHealth"></div>
 			</div>
 			<div></div>
 		</div>
