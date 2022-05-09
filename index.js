@@ -129,6 +129,32 @@ function rectangularCollision({rectangle1, rectangle2}){
 	)
 }
 
+function determineWinner({player, enemy, timerId}) {
+	clearTimeout(timerId)
+	document.querySelector('#displayResult').style.display = 'flex'
+	if (player.health === enemy.health){
+		document.querySelector('#displayResult').innerHTML = 'TIE'
+	} else if (player.health > enemy.health){
+		document.querySelector('#displayResult').innerHTML = 'PLAYER 1 WINS'
+	} else if (enemy.health > player.health){
+		document.querySelector('#displayResult').innerHTML = 'PLAYER 2 WINS'
+	}
+}
+let timer = 60
+let timerId
+function decreaseTimer(){
+	
+	if (timer > 0){
+		timerId = setTimeout(decreaseTimer, 1000)
+		timer--
+		document.querySelector('#timer').innerHTML = timer
+	}
+	if (timer === 0){
+		determineWinner({player, enemy, timerId})
+	}
+}
+decreaseTimer()
+
 function animate() {
 	// console.log('go')//Check if the gravity animate is infinite
 	window.requestAnimationFrame(animate)
@@ -167,6 +193,11 @@ function animate() {
 		enemy.isAttacking = false
 		player.health -= 20 
 		document.querySelector('#playerHealth').style.width = player.health + '%'
+	}
+
+	//End game based on health
+	if (enemy.health <= 0 || player.health <= 0){
+		determineWinner({player, enemy, timerId})
 	}
 }
 
@@ -234,4 +265,4 @@ window.addEventListener('keyup', (event) => {
 	
 })
 
-//1:34:28
+//1:51:40
