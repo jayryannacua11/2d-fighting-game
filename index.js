@@ -2,7 +2,8 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
 canvas.width = 1024
-canvas.height = 576
+//canvas.height = 576
+canvas.height = 535
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -13,13 +14,15 @@ const background = new Sprite({
 		x: 0,
 		y: 0
 	},
-	imageSrc: './img/background.png'
+	imageSrc: './img/background1.png'
 })
 
 const shop = new Sprite({
 	position: {
-		x: 600,
-		y: 127
+		//x: 600,
+		//y: 127
+		x: 400,
+		y: 150
 	},
 	imageSrc: './img/shop.png',
 	scale: 2.75,
@@ -27,9 +30,27 @@ const shop = new Sprite({
 	framesMax: 6
 })
 
+const eye = new Sprite({
+	position: {
+		x: 180,
+		y: -30
+	},
+	imageSrc: './img/flyingEye.png',
+	scale: 2,
+	framesMax: 8
+})
+const kid = new Sprite({
+	position: {
+		x: 222,
+		y: 410
+	},
+	imageSrc: './img/deadKid.png',
+	scale: 2.5
+})
+
 const player = new Fighter({
 	position: {
-		x: 0,
+		x: 120,
 		y: 0
 	},
 	velocity: {
@@ -40,56 +61,57 @@ const player = new Fighter({
 		x:0,
 		y:0
 	},
-	imageSrc: './img/samuraiMack/Idle.png',
+	imageSrc: './img/King/Idle.png',
 	framesMax: 8,
-	scale: 2.5,
+	scale: 2.6,
 	offset: {
 		x: 215,
-		y: 157
+		//y: 122
+		y: 60
 	},
 	sprites: {
 		idle: {
-			imageSrc: './img/samuraiMack/Idle.png',
+			imageSrc: './img/King/Idle.png',
 			framesMax: 8
 		},
 		run: {
-			imageSrc: './img/samuraiMack/Run.png',
+			imageSrc: './img/King/Run.png',
 			framesMax: 8
 		},
 		jump: {
-			imageSrc: './img/samuraiMack/Jump.png',
+			imageSrc: './img/King/Jump.png',
 			framesMax: 2
 		},
 		fall: {
-			imageSrc: './img/samuraiMack/Fall.png',
+			imageSrc: './img/King/Fall.png',
 			framesMax: 2
 		},
 		attack1: {
-			imageSrc: './img/samuraiMack/Attack1.png',
-			framesMax: 6
+			imageSrc: './img/King/Attack1.png',
+			framesMax: 4
 		},
 		takeHit: {
-			imageSrc: './img/samuraiMack/Take Hit - white silhouette.png',
+			imageSrc: './img/King/Take Hit - white silhouette.png',
 			framesMax: 4
 		},
 		death: {
-			imageSrc: './img/samuraiMack/Death.png',
+			imageSrc: './img/King/Death.png',
 			framesMax: 6
 		}
 	},
 	attackBox: {
 		offset: {
-			x: 100,
+			x: 50,
 			y: 50
 		},
-		width: 150, 
+		width: 120, 
 		height: 50
 	}
 })
 
 const enemy = new Fighter({
 	position: {
-		x: 400,
+		x: 800,
 		y: 100
 	},
 	velocity: {
@@ -106,7 +128,8 @@ const enemy = new Fighter({
 	scale: 2.5,
 	offset: {
 		x: 215,
-		y: 172
+		//y: 172
+		y: 110
 	},
 	sprites: {
 		idle: {
@@ -141,10 +164,10 @@ const enemy = new Fighter({
 	},
 	attackBox: {
 		offset: {
-			x: -175,
+			x: -155,
 			y: 50
 		},
-		width: 150,
+		width: 120,
 		height: 50
 	},
 
@@ -178,7 +201,9 @@ function animate() {
 	c.fillRect(0, 0, canvas.width, canvas.height)
 	background.update()
 	shop.update()
-	c.fillStyle = 'rgba(255, 255, 255, 0.08)'
+	eye.update()
+	kid.update()
+	c.fillStyle = 'rgba(255, 255, 255, 0.05)'
 	c.fillRect(0, 0, canvas.width, canvas.height)
 	player.update()
 	enemy.update()
@@ -195,7 +220,7 @@ function animate() {
 	} else if (keys.d.pressed && player.lastKey ==='d') {
 		player.velocity.x = 5
 		player.switchSprite('run')
-	} else{
+	}else{
 		//player.image = player.sprites.idle.image -> To switch case
 		player.switchSprite('idle')
 	}
@@ -230,7 +255,7 @@ function animate() {
 //Detect for collision
 	//If player2 gets hit
 	if (rectangularCollision({rectangle1: player, rectangle2: enemy})
-		&& player.isAttacking && player.framesCurrent === 4 ){
+		&& player.isAttacking && player.framesCurrent === 2 ){
 		enemy.takeDamage()
 		player.isAttacking = false
 		gsap.to('#enemyHealth', {
@@ -249,7 +274,7 @@ function animate() {
 	}
 
 	//If misses
-	if(player.isAttacking && player.framesCurrent === 4){
+	if(player.isAttacking && player.framesCurrent === 2){
 		player.isAttacking = false
 	}
 	if(enemy.isAttacking && enemy.framesCurrent === 2){
@@ -264,8 +289,22 @@ function animate() {
 
 animate() 
 
+document.querySelector('.restart-btn').addEventListener('click', function(){
+  window.location.reload();
+  return false;
+});
 //If "button" press is HOLD
 window.addEventListener('keydown', (event) => {
+	//To show what key are you pressing
+	//console.log(event.key) 
+	switch (event.key){
+		case 'y':
+			window.location.reload();
+			break;
+		case 'Y':
+			window.location.reload();
+			break;
+	}
 	if(!player.dead){
 		switch (event.key){
 			case 'd':
@@ -276,8 +315,19 @@ window.addEventListener('keydown', (event) => {
 				keys.a.pressed = true
 				player.lastKey = 'a'
 				break
+			case 'D':
+				keys.d.pressed = true
+				player.lastKey = 'd'
+				break
+			case 'A':
+				keys.a.pressed = true
+				player.lastKey = 'a'
+				break	
 			case 'w':
-				player.velocity.y = -20	
+				player.velocity.y = -18	
+				break
+			case 'W':
+				player.velocity.y = -18	
 				break
 			case ' ':
 				player.attack()
@@ -295,7 +345,7 @@ window.addEventListener('keydown', (event) => {
 				enemy.lastKey = 'ArrowLeft'
 				break
 			case 'ArrowUp':
-				enemy.velocity.y = -20	
+				enemy.velocity.y = -18	
 				break
 			case 'ArrowDown':
 				//enemy.isAttacking = true
@@ -312,6 +362,12 @@ window.addEventListener('keyup', (event) => {
 			keys.d.pressed = false
 			break
 		case 'a':
+			keys.a.pressed = false
+			break
+		case 'D':
+			keys.d.pressed = false
+			break
+		case 'A':
 			keys.a.pressed = false
 			break
 	}

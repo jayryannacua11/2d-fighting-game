@@ -120,13 +120,14 @@ class Fighter extends Sprite{
 		this.attackBox.position.x = this.position.x + this.attackBox.offset.x
 		this.attackBox.position.y = this.position.y + this.attackBox.offset.y
 
-		/*Draw the attackbox
-		c.fillRect(
-			this.attackBox.position.x,
-			this.attackBox.position.y, 
-			this.attackBox.width, 
-			this.attackBox.height
-		) */
+		//Draw the attackbox
+		// c.fillStyle = 'black'
+		// c.fillRect(
+		// 	this.attackBox.position.x,
+		// 	this.attackBox.position.y, 
+		// 	this.attackBox.width, 
+		// 	this.attackBox.height
+		// ) 
 
 		this.position.x += this.velocity.x
 		this.position.y += this.velocity.y
@@ -135,7 +136,7 @@ class Fighter extends Sprite{
 		//Gravity Function
 		if (this.position.y + this.height + this.velocity.y >= canvas.height - 96){
 			this.velocity.y = 0
-			this.position.y = 330
+			this.position.y = 289
 		} else {
 			this.velocity.y += gravity
 		}
