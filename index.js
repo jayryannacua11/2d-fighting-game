@@ -214,15 +214,19 @@ function animate() {
 	//main player movement
 	
 //Running
-	if (keys.a.pressed && player.lastKey === 'a'){
-		player.velocity.x = -5
-		player.switchSprite('run')
-	} else if (keys.d.pressed && player.lastKey ==='d') {
-		player.velocity.x = 5
-		player.switchSprite('run')
-	}else{
-		//player.image = player.sprites.idle.image -> To switch case
-		player.switchSprite('idle')
+	if (player.health > 0) { 
+		if (keys.a.pressed && player.lastKey === 'a'){
+			player.velocity.x = -5
+			player.switchSprite('run')
+		} else if (keys.d.pressed && player.lastKey ==='d') {
+			player.velocity.x = 5
+			player.switchSprite('run')
+		}else{
+			//player.image = player.sprites.idle.image -> To switch case
+			player.switchSprite('idle')
+		}
+	}else {
+		player.switchSprite('death')
 	}
 
 
@@ -235,14 +239,18 @@ function animate() {
 
 //enemy movement 
 	//Running
-	if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
-		enemy.velocity.x = -5
-		enemy.switchSprite('run')
-	} else if (keys.ArrowRight.pressed && enemy.lastKey ==='ArrowRight') {
-		enemy.velocity.x = 5
-		enemy.switchSprite('run')
-	} else{
-		enemy.switchSprite('idle')
+	if (enemy.health > 0) { 
+		if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
+			enemy.velocity.x = -5
+			enemy.switchSprite('run')
+		} else if (keys.ArrowRight.pressed && enemy.lastKey ==='ArrowRight') {
+			enemy.velocity.x = 5
+			enemy.switchSprite('run')
+		} else{
+			enemy.switchSprite('idle')
+		}
+	}else {
+		enemy.switchSprite('death')
 	}
 
 	//Jumping
@@ -255,7 +263,7 @@ function animate() {
 //Detect for collision
 	//If player2 gets hit
 	if (rectangularCollision({rectangle1: player, rectangle2: enemy})
-		&& player.isAttacking && player.framesCurrent === 2 ){
+		&& player.isAttacking && player.framesCurrent === 2){
 		enemy.takeDamage()
 		player.isAttacking = false
 		gsap.to('#enemyHealth', {
@@ -279,6 +287,10 @@ function animate() {
 	}
 	if(enemy.isAttacking && enemy.framesCurrent === 2){
 		enemy.isAttacking = false
+	}
+
+	if(enemy.isAttacking && enemy.health === 0){
+		enemy.switchSprite('death')
 	}
 
 //End game based on health
@@ -334,7 +346,7 @@ window.addEventListener('keydown', (event) => {
 				break
 		}
 	}
-	if(!enemy.dead){
+	if(enemy.health > 0){
 		switch(event.key){
 			case 'ArrowRight':
 				keys.ArrowRight.pressed = true
