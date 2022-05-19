@@ -215,10 +215,10 @@ function animate() {
 	
 //Running
 	if (player.health > 0) { 
-		if (keys.a.pressed && player.lastKey === 'a'){
+		if (keys.a.pressed && player.lastKey === 'a' && player.position.x > 5){
 			player.velocity.x = -5
 			player.switchSprite('run')
-		} else if (keys.d.pressed && player.lastKey ==='d') {
+		} else if (keys.d.pressed && player.lastKey ==='d' && player.position.x < 1000) {
 			player.velocity.x = 5
 			player.switchSprite('run')
 		}else{
@@ -228,6 +228,7 @@ function animate() {
 	}else {
 		player.switchSprite('death')
 	}
+
 
 
 //Jumping
@@ -240,10 +241,10 @@ function animate() {
 //enemy movement 
 	//Running
 	if (enemy.health > 0) { 
-		if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
+		if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft' && enemy.position.x > 0){
 			enemy.velocity.x = -5
 			enemy.switchSprite('run')
-		} else if (keys.ArrowRight.pressed && enemy.lastKey ==='ArrowRight') {
+		} else if (keys.ArrowRight.pressed && enemy.lastKey ==='ArrowRight' && enemy.position.x < 980) {
 			enemy.velocity.x = 5
 			enemy.switchSprite('run')
 		} else{
@@ -317,7 +318,7 @@ window.addEventListener('keydown', (event) => {
 			window.location.reload();
 			break;
 	}
-	if(!player.dead){
+	if(!player.dead && timer > 0){
 		switch (event.key){
 			case 'd':
 				keys.d.pressed = true
@@ -334,19 +335,13 @@ window.addEventListener('keydown', (event) => {
 			case 'A':
 				keys.a.pressed = true
 				player.lastKey = 'a'
-				break	
-			case 'w':
-				player.velocity.y = -18	
-				break
-			case 'W':
-				player.velocity.y = -18	
 				break
 			case ' ':
 				player.attack()
 				break
 		}
 	}
-	if(enemy.health > 0){
+	if(!enemy.dead && timer > 0){
 		switch(event.key){
 			case 'ArrowRight':
 				keys.ArrowRight.pressed = true
@@ -356,12 +351,26 @@ window.addEventListener('keydown', (event) => {
 				keys.ArrowLeft.pressed = true
 				enemy.lastKey = 'ArrowLeft'
 				break
-			case 'ArrowUp':
-				enemy.velocity.y = -18	
-				break
 			case 'ArrowDown':
 				//enemy.isAttacking = true
 				enemy.attack()
+				break
+		}
+	}
+	if(!player.dead && player.velocity.y === 0){
+		switch (event.key){	
+			case 'w':
+				player.velocity.y = -18	
+				break
+			case 'W':
+				player.velocity.y = -18	
+				break
+		}
+	}
+	if(!enemy.dead && enemy.velocity.y === 0){
+		switch (event.key){	
+			case 'ArrowUp':
+				enemy.velocity.y = -18	
 				break
 		}
 	}

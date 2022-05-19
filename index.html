@@ -9,8 +9,9 @@
 	<div class = "container">
 		<div class = "topContainer">
 			<!-- Player HP -->
-			
-			
+			<div class="head">
+				<img src="img/King/KingHead.png">
+			</div>
 			<div class = "playerHP">
 				<div></div> <!-- Player HP left -->
 				<div id="playerHealth"></div>
@@ -23,21 +24,19 @@
 				<div id="enemyHealth"></div>
 			</div>
 		</div>
-		<div class = "bottomContainer">
-			<div class="player1Head">
-				<img src="img/King/KingHead.png">
-				<a>KING</a>
-			</div>
-			<div class="player2Head">
-				<a>YUMIKO</a>
-				<img src="img/kenji/KenjiHead.png">	
-			</div>
-		</div>
+		
 
 		<div class="result" id="displayResult">Tie</div>
 		<canvas></canvas>
 	</div>
 	<button class="restart-btn">Restart Game</button>
+	<h3>FIXED BUG:</h3>
+	<ul>
+	  <li>Double Jumping</li>
+	  <li>Running outside game screen</li>
+	  <li>Can move when timer runs out</li>
+	  <li>Doesn't die when another animation timed perfectly</li>
+	</ul>
 
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
