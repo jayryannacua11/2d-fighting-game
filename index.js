@@ -336,7 +336,7 @@ window.addEventListener('keydown', (event) => {
 				keys.a.pressed = true
 				player.lastKey = 'a'
 				break
-			case ' ':
+			case 'Shift':
 				player.attack()
 				break
 		}
