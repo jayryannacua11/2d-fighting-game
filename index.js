@@ -357,7 +357,7 @@ window.addEventListener('keydown', (event) => {
 				break
 		}
 	}
-	if(!player.dead && player.velocity.y === 0){
+	if(!player.dead && player.velocity.y === 0 && timer > 0){
 		switch (event.key){	
 			case 'w':
 				player.velocity.y = -18	
@@ -367,7 +367,7 @@ window.addEventListener('keydown', (event) => {
 				break
 		}
 	}
-	if(!enemy.dead && enemy.velocity.y === 0){
+	if(!enemy.dead && enemy.velocity.y === 0 && timer > 0){
 		switch (event.key){	
 			case 'ArrowUp':
 				enemy.velocity.y = -18	

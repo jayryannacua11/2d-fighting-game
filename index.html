@@ -1,8 +1,10 @@
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
 	
 </head>
 <body>
@@ -19,9 +21,13 @@
 			<!-- Timer -->
 			<div class = "timer" id="timer"> 10 </div>
 			<!-- Enemy HP -->
+
 			<div class = "enemyHP">
 				<div></div> <!-- Enemy HP left -->
 				<div id="enemyHealth"></div>
+			</div>
+			<div class="head">
+				<img src="img/kenji/KenjiHead.png">
 			</div>
 		</div>
 		
@@ -29,15 +35,36 @@
 		<div class="result" id="displayResult">Tie</div>
 		<canvas></canvas>
 	</div>
-	<button class="restart-btn">Restart Game</button>
-	<h3>FIXED BUG:</h3>
-	<ul>
-	  <li>Double Jumping</li>
-	  <li>Running outside game screen</li>
-	  <li>Can move when timer runs out</li>
-	  <li>Doesn't die when another animation timed perfectly</li>
-	</ul>
 
+	<div class="disclaimer">Disclaimer: This is not an original code but I did this from scratch, applied some changes, modified the interface and fixed some major bugs</div>
+
+	<div>
+		<button class="restart-btn">Restart Game</button>
+		<div class="pressY">or just press </div> <div class="y">"Y"</div>
+	</div>
+	
+
+
+	<div style="padding-top: 20px;">CONTROLS:</div>
+	<div class="control1">
+		<div>
+			Player 1
+			<li>W - <span>Jump</span></li>
+			<li>A - <span>Run Left</span></li>
+			<li>D - <span>Run Right</span></li>
+			<li>Space - <span>Attack</span></li>
+		</div>
+	</div>
+
+	<div class="control2">
+		<div>
+		Player 2
+			<li>Arrow Up - <span>Jump</span></li>
+			<li>Arrow Left - <span>Run Left</span></li>
+			<li>Arrow Right - <span>Run Right</span></li>
+			<li>Arrow Down - <span>Attack</span></li>
+		</div>	
+	</div>	
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="js/utils.js"></script>

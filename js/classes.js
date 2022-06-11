@@ -151,6 +151,7 @@ class Fighter extends Sprite{
 	}
 	takeDamage(){
 		this.health -= 20 
+		//this.health -= Math.floor(Math.random() * 20) + 5; 
 
 		if (this.health <= 0){
 			this.switchSprite('death')
